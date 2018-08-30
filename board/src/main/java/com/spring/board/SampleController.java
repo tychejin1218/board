@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SampleController {
 
 	@RequestMapping(value = "/getSample")
-	public void getSample(HttpServletRequest request, HttpServletResponse reponse) throws Exception {		
+	public void getSample(HttpServletRequest request, HttpServletResponse reponse) throws Exception {
 		System.out.println("getSample");
 	}
 }
