@@ -7,11 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MySQLConnectionTest {
+	
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	static final String DRIVER = "com.mysql.jdbc.Driver";
-	static final String URL = "jdbc:mysql://127.0.0.1:3306/board?useSSL=false";
+	static final String URL = "jdbc:mysql://127.0.0.1:3306/board?allowPublicKeyRetrieval=true&useSSL=false";
 	static final String USERNAME = "board";
 	static final String PASSWORD = "password1!";
 
@@ -23,7 +27,7 @@ public class MySQLConnectionTest {
 		
 		try {
 			
-			System.out.println("==================== MySQL Connection START ====================");
+			logger.info("==================== MySQL Connection START ====================");
 			
 			Class.forName(DRIVER);
 			
@@ -39,9 +43,11 @@ public class MySQLConnectionTest {
 				String boardContent = rs.getString("BOARD_CONTENT");
 				String boardWriter = rs.getString("BOARD_WRITER");
 
-				System.out.print("boardSubject : " + boardSubject + ", ");
-				System.out.print("boardContent: " + boardContent + ", ");
-				System.out.println("boardWriter: " + boardWriter);
+				logger.info("boardSubject : {}", boardSubject);
+				logger.info("boardContent: {}", boardContent);
+				logger.info("boardWriter: {}", boardWriter);
+				logger.info("========================================");
+				
 			}
 
 			rs.close();
@@ -69,6 +75,6 @@ public class MySQLConnectionTest {
 			}
 		}
 		
-		System.out.println("==================== MySQL Connection END ====================");
+		logger.info("==================== MySQL Connection END ====================");
 	}
 }
