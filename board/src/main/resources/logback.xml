@@ -8,16 +8,15 @@
 	</appender>
   
   	<logger name="org.springframework" level="info" additivity="false">
-    	<appender-ref ref="STDOUT">
-  	</appender-ref></logger>
+    	<appender-ref ref="STDOUT"/>
+    </logger>
   
-  	<!-- Application Loggers -->
   	<logger name="com.spring.board" level="debug" additivity="false">
-    	<appender-ref ref="STDOUT">
-  	</appender-ref></logger>
+    	<appender-ref ref="STDOUT"/>
+    </logger>
     
   	<root level="error">
-    	<appender-ref ref="STDOUT">
-  	</appender-ref></root>
+    	<appender-ref ref="STDOUT"/>
+    </root>
   
 </configuration>
