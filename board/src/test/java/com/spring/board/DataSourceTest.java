@@ -7,6 +7,8 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -14,15 +16,21 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/*.xml" })
 public class DataSourceTest {
 
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Inject
-	private DataSource ds;
+	private DataSource dataSource;
 
-	//@Test
-	public void testConnection() throws Exception {
-		try (Connection con = ds.getConnection()) {
-			System.out.println(con);
+	@Test
+	public void dataSourceConnectionTest() throws Exception {
+		
+		Connection connection = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			logger.debug("connection : [{}]", connection);
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 	}
 }
