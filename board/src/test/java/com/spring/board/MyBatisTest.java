@@ -20,7 +20,7 @@ public class MyBatisTest {
 	@Inject
 	private SqlSessionFactory sqlSessionFactory;
 
-	@Test
+	//@Test
 	public void MyBatisSessionTest() throws Exception {
 		
 		SqlSession sessios = null;
