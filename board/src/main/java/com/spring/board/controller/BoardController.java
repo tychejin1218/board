@@ -14,17 +14,23 @@ import com.spring.board.form.BoardForm;
 import com.spring.board.service.BoardService;
 
 @Controller
-@RequestMapping( value = "/board")
+@RequestMapping(value = "/board")
 public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-	
-	@RequestMapping( value = "/getBoardList")
-	public List<BoardDto> getBoardList(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception{
+
+	@RequestMapping( value = "/boardList")
+	public String getBoardList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
+		return "board/boardList";
+	}
+
+	@RequestMapping(value = "/getBoardList")
+	public List<BoardDto> getBoardList(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
+
 		List<BoardDto> boardList = boardService.getBoardList(boardForm);
-		
+
 		return boardList;
 	}
 }

@@ -17,7 +17,7 @@ import com.spring.board.service.BoardService;
 @RunWith(SpringJUnit4ClassRunner.class)
 // @ContextConfiguration(locations = { "file:src/test/resources/appContext/appServlet/servlet-context.xml" ,
 // "file:src/test/resources/appContext/root-context.xml" })
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/*.xml", "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
+@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/*.xml" })
 public class BoardTest {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
