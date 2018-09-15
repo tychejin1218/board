@@ -19,7 +19,7 @@ public class MySQLConnectionTest {
 	static final String USERNAME = "board";
 	static final String PASSWORD = "password1!";
 
-	//@Test
+	@Test
 	public void getMySQLConnectionTest() {
 		
 		Connection conn = null;

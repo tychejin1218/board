@@ -15,18 +15,16 @@ import com.spring.board.form.BoardForm;
 import com.spring.board.service.BoardService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-// @ContextConfiguration(locations = { "file:src/test/resources/appContext/appServlet/servlet-context.xml" ,
-// "file:src/test/resources/appContext/root-context.xml" })
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/*.xml" })
+@ContextConfiguration(locations = { "classpath:/config/test-servlet-context.xml", "classpath:/config/test-root-context.xml" })
 public class BoardTest {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private BoardService boardService;
-
+	
 	@Test
-	public void getBoardList() {
+	public void test() {
 
 		BoardForm boardForm = new BoardForm();
 
@@ -40,4 +38,5 @@ public class BoardTest {
 			e.printStackTrace();
 		}
 	}
+
 }
