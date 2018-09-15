@@ -5,6 +5,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판 목록</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		alert("123");
+		getBoardList();
+	});
+
+	function getBoardList(){
+		
+		$.ajax({			
+			type:"GET",
+		    url:"/board/getBoardList",
+	        dataType:"JSON",
+	        success : function(data) {
+	        	console.log(data);
+	        },	       
+	        error : function(xhr, status, error) {}
+	     });
+	}
+	
+</script>
 </head>
 <body>
 
