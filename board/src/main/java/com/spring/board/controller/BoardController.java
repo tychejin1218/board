@@ -21,12 +21,14 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	/** 게시판 - 목록 페이지 이동 */
 	@RequestMapping( value = "/boardList")
-	public String getBoardList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String boardList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		return "board/boardList";
 	}
-
+		
+	/** 게시판 - 목록 조회  */
 	@RequestMapping(value = "/getBoardList")
 	@ResponseBody
 	public List<BoardDto> getBoardList(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
@@ -34,5 +36,23 @@ public class BoardController {
 		List<BoardDto> boardList = boardService.getBoardList(boardForm);
 
 		return boardList;
+	}
+	
+	/** 게시판 - 상세 페이지 이동 */
+	@RequestMapping( value = "/boardDetail")
+	public String boardDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		return "board/boardDetail";
+	}	
+	
+	/** 게시판 - 상세 조회  */
+	@RequestMapping(value = "/getBoardDetail")
+	@ResponseBody
+	public BoardDto getBoardDetail(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(boardForm.getBoard_seq());
+		BoardDto boardDetail = boardService.getBoardDetail(boardForm);
+
+		return boardDetail;
 	}
 }

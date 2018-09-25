@@ -1,7 +1,5 @@
 package com.spring.board.dto;
 
-import java.util.Date;
-
 public class BoardDto {
 
 	int board_seq;
@@ -14,9 +12,9 @@ public class BoardDto {
 	int board_hits;
 	String del_yn;
 	String ins_user_id;
-	Date ins_date;
+	String ins_date;
 	String upd_user_id;
-	Date upd_date;
+	String upd_date;
 
 	public int getBoard_seq() {
 		return board_seq;
@@ -98,11 +96,11 @@ public class BoardDto {
 		this.ins_user_id = ins_user_id;
 	}
 
-	public Date getIns_date() {
+	public String getIns_date() {
 		return ins_date;
 	}
 
-	public void setIns_date(Date ins_date) {
+	public void setIns_date(String ins_date) {
 		this.ins_date = ins_date;
 	}
 
@@ -114,11 +112,12 @@ public class BoardDto {
 		this.upd_user_id = upd_user_id;
 	}
 
-	public Date getUpd_date() {
+	public String getUpd_date() {
 		return upd_date;
 	}
 
-	public void setUpd_date(Date upd_date) {
+	public void setUpd_date(String upd_date) {
 		this.upd_date = upd_date;
 	}
+
 }
