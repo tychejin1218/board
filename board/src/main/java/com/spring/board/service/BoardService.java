@@ -23,8 +23,55 @@ public class BoardService {
 	
 	/** 게시판 - 상세 조회  */
 	public BoardDto getBoardDetail(BoardForm boardForm) throws Exception {
-		System.out.println("@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(boardForm.getBoard_seq());
+
 		return boardDao.getBoardDetail(boardForm);
+	}
+	
+	/** 게시판 - 등록  */
+	public BoardDto insertBoard(BoardForm boardForm) throws Exception {
+
+		BoardDto boardDto = new BoardDto();
+
+		int insertCnt = boardDao.insertBoard(boardForm);
+		
+		if(insertCnt > 0){
+			boardDto.setResult("SUCCESS");
+		} else {
+			boardDto.setResult("FAIL");
+		}
+		
+		return boardDto;
+	}
+	
+	/** 게시판 - 삭제 */
+	public BoardDto deleteBoard(BoardForm boardForm) throws Exception {
+
+		BoardDto boardDto = new BoardDto();
+
+		int deleteCnt = boardDao.deleteBoard(boardForm);
+		
+		if(deleteCnt > 0){
+			boardDto.setResult("SUCCESS");
+		} else {
+			boardDto.setResult("FAIL");
+		}
+		
+		return boardDto;
+	}
+	
+	/** 게시판 - 수정 */
+	public BoardDto updateBoard(BoardForm boardForm) throws Exception {
+
+		BoardDto boardDto = new BoardDto();
+
+		int deleteCnt = boardDao.updateBoard(boardForm);
+		
+		if(deleteCnt > 0){
+			boardDto.setResult("SUCCESS");
+		} else {
+			boardDto.setResult("FAIL");
+		}
+		
+		return boardDto;
 	}
 }

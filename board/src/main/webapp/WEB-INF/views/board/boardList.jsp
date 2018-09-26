@@ -12,12 +12,10 @@
         response.setHeader("Cache-Control", "no-cache"); 
 	    
 	// Context Root
-	String contextRoot = response.encodeURL(request.getContextPath());
-	
+	String contextRoot = response.encodeURL(request.getContextPath());	
 %>
 
-<!-- Context Root -->
-<c:set var="contextRoot" value="<%=contextRoot%>"/>
+<c:set var="contextRoot" value="<%=contextRoot%>"/>	<!-- Context Root -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,22 +25,39 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	
+	/** 전역변수 선언 */
+	var _CONTEXTROOT = "${contextRoot}";
+	var _URLDOMAIN = getUrlDomain();
+
 	$(document).ready(function(){		
 		getBoardList();
 	});
+		
+	/** 도메인 값 얻기  */
+	function getUrlDomain() {		
+		return (location.href).replace("http://", "").replace("https://", "").split("/")[0];
+	}
+	
+	/** 게시판 - 상세 페이지 이동 */
+	function goBoardDetail(boardSeq){				
+		location.href = "http://" + _CONTEXTROOT + _URLDOMAIN + "/board/boardDetail?boardSeq="+ boardSeq;
+	}
+	
+	/** 게시판 - 작성 페이지 이동 */
+	function goBoardWrite(){				
+		location.href = "http://" + _CONTEXTROOT + _URLDOMAIN + "/board/boardWrite";
+	}
 
 	/** 게시판 - 목록 조회  */
 	function getBoardList(){
 		
-		var param = {};
-		
 		$.ajax({	
 		
 		    url		:"/board/getBoardList",
-		    data    : param,
+		    data    : $("#boardForm").serialize(),
 	        dataType:"JSON",
 	        cache   : false,
-			async   : param.async == undefined ? true : param.async,
+			async   : true,
 			type	:"GET",	
 	        success : function(obj) {
 				getBoardListCallback(obj);				
@@ -80,9 +95,9 @@
 				
 				str += "<tr>";
 				str += "<td>"+ boardSeq +"</td>";
-				str += "<td onclick='javascript:getBoardDetail("+ boardSeq +");'>"+ boardSubject +"</td>";
+				str += "<td onclick='javascript:goBoardDetail("+ boardSeq +");'>"+ boardSubject +"</td>";
 				str += "<td>"+ boardHits +"</td>";
-				str += "<td>"+ insUserId +"</td>";	
+				str += "<td>"+ boardWriter +"</td>";	
 				str += "<td>"+ insDate +"</td>";	
 				str += "</tr>";
 				
@@ -90,59 +105,41 @@
 			
 		} else {
 			
-			str += "<tr colspan='4'>";
-			str += "<td>등록된 글이 존재하지 않습니다.</td>";
+			str += "<tr>";
+			str += "<td colspan='5'>등록된 글이 존재하지 않습니다.</td>";
 			str += "<tr>";
 		}
 		
 		$("#tbody").html(str);
 	}
 	
-	/** 전역변수 선언 */
-	var _CONTEXTROOT = "${contextRoot}";
-	var _URLDOMAIN 	= getUrlDomain();
-	
-	/** 도메인 값 얻기  */
-	function getUrlDomain() {
-		
-		return (location.href).replace("http://", "").replace("https://", "").split("/")[0];
-	}
-	
-	/** 페이지 이동 */
-	function getBoardDetail(boardSeq){
-		
-		console.log(boardSeq);
-		console.log(_CONTEXTROOT);
-		console.log(_URLDOMAIN);
-		
-		location.href = "http://" + _CONTEXTROOT + _URLDOMAIN + "/board/boardDetail?boardSeq="+ boardSeq;
-	}
-
-	
 </script>
 </head>
 <body>
-<table border=1 width="650px">
-	<colgroup>
-		<col width="15%" />
-		<col width="20%" />
-		<col width="10%" />
-		<col width="15%" />
-		<col width="20%" />
-	</colgroup>
-	<thead>		
-		<tr>
-			<td>글번호</td>
-			<td>제목</td>
-			<td>조회수</td>
-			<td>작성자</td>
-			<td>작성일</td>
-		</tr>
-	</thead>
-	<tbody id="tbody">
-	
-	</tbody>
-	
-</table>
+<h2>게시글 목록</h2>
+<form id="boardForm" name="boardForm">
+	<table border=1 width="650px">
+		<colgroup>
+			<col width="10%" />
+			<col width="20%" />
+			<col width="10%" />
+			<col width="20%" />
+			<col width="20%" />
+		</colgroup>
+		<thead>		
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>조회수</th>
+				<th>작성자</th>
+				<th>작성일</th>
+			</tr>
+		</thead>
+		<tbody id="tbody">
+		
+		</tbody>	
+	</table>
+</form>
+<button onclick="javascript:goBoardWrite();">작성하기</button>
 </body>
 </html>

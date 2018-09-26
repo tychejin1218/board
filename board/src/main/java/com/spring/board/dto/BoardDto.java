@@ -16,6 +16,8 @@ public class BoardDto {
 	String upd_user_id;
 	String upd_date;
 
+	String result;
+
 	public int getBoard_seq() {
 		return board_seq;
 	}
@@ -118,6 +120,14 @@ public class BoardDto {
 
 	public void setUpd_date(String upd_date) {
 		this.upd_date = upd_date;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 }
