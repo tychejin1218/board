@@ -146,23 +146,31 @@
 </script>
 </head>
 <body>
-<h2>게시글 상세</h2>
-<form id="boardForm" name="boardForm">	
-	<table border=1 width="650px">
-	    <colgroup>
-	        <col width="15%">
-	        <col width="35%">
-	        <col width="15%">
-	        <col width="*">
-	    </colgroup>
-	    <tbody id="tbody">
-	       
-	    </tbody>
-	</table>	
-	<input type="hidden" id="board_seq" name="board_seq" value="${boardSeq}"/> <!-- 게시글 번호 -->
-</form>
-<button onclick="javascript:goBoardList();">목록으로</button>
-<button onclick="javascript:goBoardUpdate();">수정하기</button>
-<button onclick="javascript:deleteBoard();">삭제하기</button>
+<div id="wrap">
+	<div id="container">
+		<div class="inner">	
+			<h2>게시글 상세</h2>
+			<form id="boardForm" name="boardForm">		
+				<table width="100%" class="table01">
+				    <colgroup>
+				        <col width="15%">
+				        <col width="35%">
+				        <col width="15%">
+				        <col width="*">
+				    </colgroup>
+				    <tbody id="tbody">
+				       
+				    </tbody>
+				</table>		
+				<input type="hidden" id="board_seq" name="board_seq" value="${boardSeq}"/> <!-- 게시글 번호 -->
+			</form>
+			<div class="btn_right mt15">
+				<button type="button" class="btn black mr5" onclick="javascript:goBoardList();">목록으로</button>
+				<button type="button" class="btn black mr5" onclick="javascript:goBoardUpdate();">수정하기</button>
+				<button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

@@ -135,31 +135,40 @@
 </script>
 </head>
 <body>
-<h2>게시글 상세</h2>
-<form id="boardForm" name="boardForm">	
-	<table border=1 width="650px">
-	    <colgroup>
-	        <col width="15%">
-	        <col width="35%">
-	        <col width="15%">
-	        <col width="*">
-	    </colgroup>
-	    <tbody id="tbody">
-	       <tr>
-				<th>제목</th>
-				<td><input id="board_subject" name="board_subject" value="" style="width:90%"/></td>
-				<th>작성자</th>
-				<td id="board_writer"></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td colspan="3"><textarea id="board_content" name="board_content" cols="65" rows="10" ></textarea></td>
-			</tr>
-	    </tbody>
-	</table>	
-	<input type="hidden" id="board_seq" name="board_seq" value="${boardSeq}"/> <!-- 게시글 번호 -->
-</form>
-<button onclick="javascript:goBoardList();">목록으로</button>
-<button onclick="javascript:updateBoard();">수정하기</button>
+<div id="wrap">
+	<div id="container">
+		<div class="inner">	
+			<h2>게시글 상세</h2>
+			<form id="boardForm" name="boardForm">	
+				<table width="100%" class="table02">
+				<caption><strong><span class="t_red">*</span> 표시는 필수입력 항목입니다.</strong></caption>
+				    <colgroup>
+				         <col width="20%">
+				        <col width="*">
+				    </colgroup>
+				    <tbody id="tbody">
+				       <tr>
+							<th>제목<span class="t_red">*</span></th>
+							<td><input id="board_subject" name="board_subject" value="" class="tbox01"/></td>
+						</tr>
+						 <tr>
+							<th>작성자</th>
+							<td id="board_writer"></td>
+						</tr>
+						<tr>
+							<th>내용<span class="t_red">*</span></th>
+							<td colspan="3"><textarea id="board_content" name="board_content" cols="50" rows="5" class="textarea01"></textarea></td>
+						</tr>
+				    </tbody>
+				</table>	
+				<input type="hidden" id="board_seq" name="board_seq" value="${boardSeq}"/> <!-- 게시글 번호 -->
+			</form>
+			<div class="btn_right mt15">
+				<button type="button" class="btn black mr5" onclick="javascript:goBoardList();">목록으로</button>
+				<button type="button" class="btn black" onclick="javascript:updateBoard();">수정하기</button>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

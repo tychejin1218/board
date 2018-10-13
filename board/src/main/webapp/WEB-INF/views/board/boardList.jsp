@@ -17,7 +17,7 @@
 	}
 	
 	/** 게시판 - 작성 페이지 이동 */
-	function goBoardWrite(){				
+	function goBoardWrite(){		
 		location.href = "http://" + _CONTEXTROOT + _URLDOMAIN + "/board/boardWrite";
 	}
 
@@ -95,30 +95,38 @@
 </script>
 </head>
 <body>
-<h2>게시글 목록</h2>
-<form id="boardForm" name="boardForm">
-	<table border=1 width="650px">
-		<colgroup>
-			<col width="10%" />
-			<col width="20%" />
-			<col width="10%" />
-			<col width="20%" />
-			<col width="20%" />
-		</colgroup>
-		<thead>		
-			<tr>
-				<th>글번호</th>
-				<th>제목</th>
-				<th>조회수</th>
-				<th>작성자</th>
-				<th>작성일</th>
-			</tr>
-		</thead>
-		<tbody id="tbody">
-		
-		</tbody>	
-	</table>
-</form>
-<button onclick="javascript:goBoardWrite();">작성하기</button>
+<div id="wrap">
+	<div id="container">
+		<div class="inner">		
+			<h2>게시글 목록</h2>			
+			<form id="boardForm" name="boardForm">
+				<table width="100%" class="table01">
+					<colgroup>
+						<col width="10%" />
+						<col width="25%" />
+						<col width="10%" />
+						<col width="15%" />
+						<col width="20%" />
+					</colgroup>
+					<thead>		
+						<tr>
+							<th>글번호</th>
+							<th>제목</th>
+							<th>조회수</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+					
+					</tbody>	
+				</table>
+			</form>			
+			<div class="btn_right mt15">
+				<button type="button" class="btn black mr5" onclick="javascript:goBoardWrite();">작성하기</button>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
