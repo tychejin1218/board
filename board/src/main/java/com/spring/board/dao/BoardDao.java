@@ -24,14 +24,19 @@ public class BoardDao {
 		return sqlSession.selectList(NAMESPACE + ".getBoardList", boardForm);
 	}
 	
+	/** 게시판 - 조회 수 수정  */
+	public int updateBoardHits(BoardForm boardForm) throws Exception {
+		
+		return sqlSession.update(NAMESPACE + ".updateBoardHits", boardForm);
+	}
+	
 	/** 게시판 - 상세 조회  */
 	public BoardDto getBoardDetail(BoardForm boardForm) throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE + ".getBoardDetail", boardForm);
 	}
 	
-	/** 게시판 - 등록  */
-	
+	/** 게시판 - 등록  */	
 	public int insertBoard(BoardForm boardForm) throws Exception {
 		return sqlSession.insert(NAMESPACE + ".insertBoard", boardForm);
 	}

@@ -19,8 +19,19 @@
 			 , UPD_USER_ID
 			 , CAST( DATE_FORMAT( UPD_DATE, '%Y-%m-%d %H:%i:%s' ) AS CHAR(19) ) AS UPD_DATE  
 		FROM BOARD.TB_BOARD
+		ORDER BY BOARD_SEQ DESC
 	
 	</select>
+	
+	<delete id="updateBoardHits" parameterType="com.spring.board.form.BoardForm">
+	
+		UPDATE BOARD.TB_BOARD 
+		   SET BOARD_HITS = BOARD_HITS + 1		     
+		     , UPD_USER_ID = 'NONMEMBER'
+		     , UPD_DATE = NOW()
+ 		WHERE BOARD_SEQ = #{board_seq}
+	
+	</delete>
 	
 	<select id="getBoardDetail" parameterType="com.spring.board.form.BoardForm" resultType="com.spring.board.dto.BoardDto">
 	
@@ -66,9 +77,9 @@
 			, #{board_writer}
 			, #{board_subject}
 			, #{board_content}
-			, #{ins_user_id}
+			, 'NONMEMBER'
 			, NOW() 
-			, #{ins_user_id}
+			, 'NONMEMBER'
 			, NOW() 
 		)
 	
@@ -87,7 +98,7 @@
 		UPDATE BOARD.TB_BOARD 
 		   SET BOARD_SUBJECT = #{board_subject}
 		     , BOARD_CONTENT = #{board_content}
-		     , UPD_USER_ID = 'TEST'
+		     , UPD_USER_ID = 'NONMEMBER'
 		     , UPD_DATE = NOW()
  		WHERE BOARD_SEQ = #{board_seq}
 	

@@ -1,29 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게시판 목록</title>
 
-<%@ include file="/WEB-INF/views/common/common.jsp"%>
+<!-- 공통 CSS -->
+<link rel="stylesheet" type="text/css" href="/css/common/common.css"/>
 
+<!-- 공통 JavaScript -->
+<script type="text/javascript" src="/js/common/jquery.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){	
-
-		gfnSetLoadingBar(100);
-	
 		getBoardList();
 	});		
 	
 	/** 게시판 - 상세 페이지 이동 */
 	function goBoardDetail(boardSeq){				
-		location.href = "http://" + _CONTEXTROOT + _URLDOMAIN + "/board/boardDetail?boardSeq="+ boardSeq;
+		location.href = "/board/boardDetail?boardSeq="+ boardSeq;
 	}
 	
 	/** 게시판 - 작성 페이지 이동 */
 	function goBoardWrite(){		
-		location.href = "http://" + _CONTEXTROOT + _URLDOMAIN + "/board/boardWrite";
+		location.href = "/board/boardWrite";
 	}
 
 	/** 게시판 - 목록 조회  */
 	function getBoardList(){
-		
+
 		$.ajax({	
 		
 		    url		:"/board/getBoardList",
@@ -31,18 +36,12 @@
 	        dataType:"JSON",
 	        cache   : false,
 			async   : true,
-			type	:"GET",	
-		 	beforeSend : function(){
-            	gfnStartLoading();
-            },
+			type	:"POST",	
 	        success : function(obj) {
 				getBoardListCallback(obj);				
 	        },	       
-	        error 	: function(xhr, status, error) {},
-	        complete : function(){
-            	gfnEndLoading();
-            }
-           
+	        error 	: function(xhr, status, error) {}
+	        
 	     });
 	}
 	
@@ -74,7 +73,7 @@
 				
 				str += "<tr>";
 				str += "<td>"+ boardSeq +"</td>";
-				str += "<td onclick='javascript:goBoardDetail("+ boardSeq +");'>"+ boardSubject +"</td>";
+				str += "<td onclick='javascript:goBoardDetail("+ boardSeq +");' style='cursor:Pointer'>"+ boardSubject +"</td>";
 				str += "<td>"+ boardHits +"</td>";
 				str += "<td>"+ boardWriter +"</td>";	
 				str += "<td>"+ insDate +"</td>";	

@@ -1,49 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ include file="/WEB-INF/views/common/common.jsp"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게시판 수정</title>
 <%	
 	String boardSeq = request.getParameter("boardSeq");		
 %>
 
 <c:set var="boardSeq" value="<%=boardSeq%>"/> <!-- 게시글 번호 -->
 
+<!-- 공통 CSS -->
+<link rel="stylesheet" type="text/css" href="/css/common/common.css"/>
+
+<!-- 공통 JavaScript -->
+<script type="text/javascript" src="/js/common/jquery.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function(){		
-		
-		var boardSeq = $("#board_seq").val();
-
-		getBoardDetail(boardSeq);		
+		getBoardDetail();		
 	});
-
-	/** 도메인 값 얻기  */
-	function getUrlDomain() {		
-		return (location.href).replace("http://", "").replace("https://", "").split("/")[0];
-	}
 	
 	/** 게시판 - 목록 페이지 이동 */
 	function goBoardList(){				
-		location.href = "http://" + _CONTEXTROOT + _URLDOMAIN + "/board/boardList";
+		location.href = "/board/boardList";
 	}
 	
 	/** 게시판 - 상세 조회  */
 	function getBoardDetail(boardSeq){
 		
-		$.ajax({	
-		
-		    url		: "/board/getBoardDetail",
-		    data    : $("#boardForm").serialize(),
-	        dataType: "JSON",
-	        cache   : false,
-			async   : true,
-			type	: "GET",	
-	        success : function(obj) {
-	        	getBoardDetailCallback(obj);				
-	        },	       
-	        error 	: function(xhr, status, error) {}
-	        
-	     });
+		var boardSeq = $("#board_seq").val();
+
+		if(boardSeq != ""){
+			
+			$.ajax({	
+				
+			    url		: "/board/getBoardDetail",
+			    data    : $("#boardForm").serialize(),
+		        dataType: "JSON",
+		        cache   : false,
+				async   : true,
+				type	: "POST",	
+		        success : function(obj) {
+		        	getBoardDetailCallback(obj);				
+		        },	       
+		        error 	: function(xhr, status, error) {}
+		        
+		     });
+			
+		} else {
+			alert("오류가 발생했습니다.\n관리자에게 문의하세요.");
+		}	
 	}
 	
 	/** 게시판 - 상세 조회  콜백 함수 */
@@ -105,7 +114,7 @@
 		        dataType: "JSON",
 		        cache   : false,
 		        async   : true,
-				type	: "GET",	
+				type	: "POST",	
 		        success : function(obj) {
 		        	updateBoardCallback(obj);				
 		        },	       
@@ -161,7 +170,8 @@
 						</tr>
 				    </tbody>
 				</table>	
-				<input type="hidden" id="board_seq" name="board_seq" value="${boardSeq}"/> <!-- 게시글 번호 -->
+				<input type="hidden" id="board_seq"		name="board_seq"	value="${boardSeq}"/> <!-- 게시글 번호 -->
+				<input type="hidden" id="search_type"	name="search_type"	value="U"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
 			</form>
 			<div class="btn_right mt15">
 				<button type="button" class="btn black mr5" onclick="javascript:goBoardList();">목록으로</button>

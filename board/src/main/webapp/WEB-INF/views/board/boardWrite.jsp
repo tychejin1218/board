@@ -1,28 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게시판 작성</title>
 
-<%@ include file="/WEB-INF/views/common/common.jsp"%>
+<!-- 공통 CSS -->
+<link rel="stylesheet" type="text/css" href="/css/common/common.css"/>
 
+<!-- 공통 JavaScript -->
+<script type="text/javascript" src="/js/common/jquery.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function(){		
 		
 	});
-	
-	/** 도메인 값 얻기  */
-	function getUrlDomain() {		
-		return (location.href).replace("http://", "").replace("https://", "").split("/")[0];
-	}
-	
+		
 	/** 게시판 - 목록 페이지 이동 */
 	function goBoardList(){				
-		location.href = "http://" + _CONTEXTROOT + _URLDOMAIN + "/board/boardList";
+		location.href = "/board/boardList";
 	}
 	
 	/** 게시판 - 작성  */
 	function insertBoard(){
 
-		var boardSubject	= $("#board_subject").val();
-		var boardContent 	= $("#board_content").val();
+		var boardSubject = $("#board_subject").val();
+		var boardContent = $("#board_content").val();
 			
 		if (boardSubject == ""){			
 			alert("제목을 입력해주세요.");
@@ -46,7 +49,7 @@
 		        dataType: "JSON",
 		        cache   : false,
 		        async   : true,
-				type	: "GET",	
+				type	: "POST",	
 		        success : function(obj) {
 		        	insertBoardCallback(obj);				
 		        },	       
