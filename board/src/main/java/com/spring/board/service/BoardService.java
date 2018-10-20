@@ -1,5 +1,6 @@
 package com.spring.board.service;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import com.spring.board.dao.BoardDao;
 import com.spring.board.dto.BoardDto;
 import com.spring.board.form.BoardForm;
 
-@Service
+@Service()
 public class BoardService {
 
 	@Autowired
@@ -28,16 +29,16 @@ public class BoardService {
 
 		String searchType = boardForm.getSearch_type();
 
-		if("S".equals(searchType)){
-			
+		if ("S".equals(searchType)) {
+
 			int updateCnt = boardDao.updateBoardHits(boardForm);
-		
+
 			if (updateCnt > 0) {
 				boardDto = boardDao.getBoardDetail(boardForm);
 			}
-			
+
 		} else {
-			
+
 			boardDto = boardDao.getBoardDetail(boardForm);
 		}
 
@@ -49,7 +50,11 @@ public class BoardService {
 
 		BoardDto boardDto = new BoardDto();
 
-		int insertCnt = boardDao.insertBoard(boardForm);
+		int insertCnt = 0;
+		
+		insertCnt = boardDao.insertBoard(boardForm);
+		
+		//insertCnt = boardDao.insertBoardFail(boardForm);
 
 		if (insertCnt > 0) {
 			boardDto.setResult("SUCCESS");

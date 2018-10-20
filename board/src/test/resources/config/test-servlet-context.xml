@@ -14,13 +14,17 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 	
-	<context:component-scan base-package="com.spring.board" />
-	
+	<context:component-scan base-package="com.spring.board" use-default-filters="false"> 
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
+	</context:component-scan>
+
 	<mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <beans:bean id="loggerInterceptor" class="com.spring.board.common.LoggerInterceptor"></beans:bean>
         </mvc:interceptor>
     </mvc:interceptors>
-	
+    
+    <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+
 </beans:beans>

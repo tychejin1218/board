@@ -40,6 +40,11 @@ public class BoardDao {
 	public int insertBoard(BoardForm boardForm) throws Exception {
 		return sqlSession.insert(NAMESPACE + ".insertBoard", boardForm);
 	}
+
+	/** 게시판 - 등록 실패(트랜잭션 테스트)  */	
+	public int insertBoardFail(BoardForm boardForm) throws Exception {
+		return sqlSession.insert(NAMESPACE + ".insertBoardFail", boardForm);
+	}
 	
 	/** 게시판 - 삭제  */
 	public int deleteBoard(BoardForm boardForm) throws Exception {
