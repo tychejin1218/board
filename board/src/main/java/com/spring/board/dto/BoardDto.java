@@ -1,6 +1,6 @@
 package com.spring.board.dto;
 
-public class BoardDto {
+public class BoardDto extends CommonDto {
 
 	int board_seq;
 	int board_re_ref;
@@ -15,7 +15,6 @@ public class BoardDto {
 	String ins_date;
 	String upd_user_id;
 	String upd_date;
-
 	String result;
 
 	public int getBoard_seq() {

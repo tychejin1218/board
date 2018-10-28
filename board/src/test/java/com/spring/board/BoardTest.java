@@ -30,9 +30,9 @@ public class BoardTest {
 
 		try {
 
-			List<BoardDto> boardList = boardService.getBoardList(boardForm);
+			//List<BoardDto> boardList = boardService.getBoardList(boardForm);
 
-			logger.info("boardList.size() : [{}]", boardList.size());
+			//logger.info("boardList.size() : [{}]", boardList.size());
 
 		} catch (Exception e) {
 			e.printStackTrace();

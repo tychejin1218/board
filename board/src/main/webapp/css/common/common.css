@@ -28,6 +28,10 @@ table.table02 caption.center{padding-top:6px;height:39px;line-height:130%;text-a
 table.table02 tbody th{padding:10px;vertical-align:middle;font-family:'malgunbd';color:#333;border-right:1px solid #c9c9c9;border-bottom:1px solid #c9c9c9;background:#ececec}
 table.table02 tbody td{padding:10px;vertical-align:middle;padding-left:15px;background:#fafafa;border-bottom:1px solid #c9c9c9}
 
+/* link_style */
+a:link, a:visited, a:hover, a:active{color:#666;text-decoration:underline}
+a:hover{color:#0076c8}
+
 /* button */
 .btn {font-family:'malgunbd';display:inline-block;padding:3px 20px 6px 20px;margin:0;border:1px solid #aaa;cursor:pointer;color:#333;border-radius:2px;vertical-align:middle;font-size:13px;letter-spacing:-1px;line-height:normal;background-color:#feffff;text-decoration:none;}
 .btn.black {border-color:#191919;color:#fff;background-color:#333;text-decoration:none;}
@@ -60,3 +64,15 @@ textarea.textarea01{width:410px;height:95px;margin:10px 0}
 .mt15{margin-top:15px}
 .mb10{margin-bottom:10px}
 .mb25{margin-bottom:25px}
+
+/* page_option */
+.page_info{margin-bottom:10px;text-align:right}
+.page_info span.total_count{font-size:12px;color:#333}
+
+/* pagination */
+.pagination{display:block;margin-top:15px;text-align:center;line-height:normal;color:#666}
+.pagination *{display:inline-block;text-decoration:none;vertical-align:top}
+.pagination a{text-decoration:none;padding:0 5px;line-height:20px}
+.pagination a.onpage{font-family:'malgunbd';color:#0460a5}
+.pagination .direction_left01{margin:0 6px 0 3px}
+.pagination .direction_right01{margin:0 3px 0 6px}
