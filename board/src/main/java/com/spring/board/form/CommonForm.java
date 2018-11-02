@@ -6,10 +6,10 @@ public class CommonForm {
 	int current_page_no;
 	int count_per_page;
 	int count_per_list;
-	int tatal_page_cout;
+	int tatal_page_count;
 	int tatal_list_count;
-	int start_index;
-	int end_index;
+	int limit;
+	int offset;
 
 	public String getFunction_name() {
 		return function_name;
@@ -43,12 +43,12 @@ public class CommonForm {
 		this.count_per_list = count_per_list;
 	}
 
-	public int getTatal_page_cout() {
-		return tatal_page_cout;
+	public int getTatal_page_count() {
+		return tatal_page_count;
 	}
 
-	public void setTatal_page_cout(int tatal_page_cout) {
-		this.tatal_page_cout = tatal_page_cout;
+	public void setTatal_page_count(int tatal_page_count) {
+		this.tatal_page_count = tatal_page_count;
 	}
 
 	public int getTatal_list_count() {
@@ -59,20 +59,20 @@ public class CommonForm {
 		this.tatal_list_count = tatal_list_count;
 	}
 
-	public int getStart_index() {
-		return start_index;
+	public int getLimit() {
+		return limit;
 	}
 
-	public void setStart_index(int start_index) {
-		this.start_index = start_index;
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
-	public int getEnd_index() {
-		return end_index;
+	public int getOffset() {
+		return offset;
 	}
 
-	public void setEnd_index(int end_index) {
-		this.end_index = end_index;
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 
 }

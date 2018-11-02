@@ -29,7 +29,7 @@
 			   FROM BOARD.TB_BOARD
 			   ORDER BY BOARD_SEQ DESC			
 			  ) T1
-		LIMIT #{start_index}, #{count_per_page}
+		LIMIT #{limit} OFFSET #{offset}
 	
 	</select>
 	

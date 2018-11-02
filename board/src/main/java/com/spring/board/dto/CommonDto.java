@@ -2,24 +2,24 @@ package com.spring.board.dto;
 
 public class CommonDto {
 
-	int start_index;
-	int end_index;
+	int limit;
+	int offset;
 	String pagination;
 
-	public int getStart_index() {
-		return start_index;
+	public int getLimit() {
+		return limit;
 	}
 
-	public void setStart_index(int start_index) {
-		this.start_index = start_index;
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
-	public int getEnd_index() {
-		return end_index;
+	public int getOffset() {
+		return offset;
 	}
 
-	public void setEnd_index(int end_index) {
-		this.end_index = end_index;
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 
 	public String getPagination() {

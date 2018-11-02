@@ -38,9 +38,8 @@ public class BoardService {
 			commonDto = PagingUtil.setPageUtil(commonForm);
 		}
 
-		boardForm.setStart_index(commonDto.getStart_index() - 1);
-		boardForm.setEnd_index(commonDto.getEnd_index());
-		boardForm.setCount_per_page(10);
+		boardForm.setLimit(commonDto.getLimit());
+		boardForm.setOffset(commonDto.getOffset());
 
 		List<BoardDto> list = boardDao.getBoardList(boardForm);
 
@@ -91,16 +90,16 @@ public class BoardService {
 
 		int insertCnt = 0;
 
-		for (int a = 0; a < 1527; a++) {
-			
-			boardForm.setBoard_subject("제목_" + a);
-			boardForm.setBoard_content("내용_" + a);
-			boardForm.setBoard_writer("작성자_" + a);
+//		for (int a = 0; a < 1527; a++) {
+//			
+//			boardForm.setBoard_subject("제목_" + a);
+//			boardForm.setBoard_content("내용_" + a);
+//			boardForm.setBoard_writer("작성자_" + a);
+//
+//			insertCnt = boardDao.insertBoard(boardForm);
+//		}
 
-			insertCnt = boardDao.insertBoard(boardForm);
-		}
-
-		// insertCnt = boardDao.insertBoard(boardForm);
+		insertCnt = boardDao.insertBoard(boardForm);
 
 		// insertCnt = boardDao.insertBoardFail(boardForm);
 
