@@ -86,7 +86,19 @@
 					
 					str += "<tr>";
 					str += "<td>"+ boardSeq +"</td>";
-					str += "<td onclick='javascript:goBoardDetail("+ boardSeq +");' style='cursor:Pointer'>"+ boardSubject +"</td>";
+										
+					str += "<td onclick='javascript:goBoardDetail("+ boardSeq +");' style='cursor:Pointer'>";
+					
+					if(boardReLev > 0){
+						
+						for(var b=0; b<boardReLev; b++){
+							
+							str += "Re:";
+						}
+					}
+					
+					str += boardSubject +"</td>";
+										
 					str += "<td>"+ boardHits +"</td>";
 					str += "<td>"+ boardWriter +"</td>";	
 					str += "<td>"+ insDate +"</td>";	

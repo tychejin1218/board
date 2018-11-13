@@ -36,6 +36,14 @@
 		location.href = "/board/boardUpdate?boardSeq="+ boardSeq;
 	}
 	
+	/** 게시판 - 답글 페이지 이동 */
+	function goBoardReply(){
+		
+		var boardSeq = $("#board_seq").val();
+		
+		location.href = "/board/boardReply?boardSeq="+ boardSeq;
+	}
+	
 	/** 게시판 - 상세 조회  */
 	function getBoardDetail(boardSeq){
 		
@@ -177,6 +185,7 @@
 				<button type="button" class="btn black mr5" onclick="javascript:goBoardList();">목록으로</button>
 				<button type="button" class="btn black mr5" onclick="javascript:goBoardUpdate();">수정하기</button>
 				<button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
+				<button type="button" class="btn black mr5" onclick="javascript:goBoardReply();">답글쓰기</button>
 			</div>
 		</div>
 	</div>

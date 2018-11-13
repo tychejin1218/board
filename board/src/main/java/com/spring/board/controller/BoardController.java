@@ -1,7 +1,5 @@
 package com.spring.board.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -96,6 +94,23 @@ public class BoardController {
 	public BoardDto updateBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
 		BoardDto boardDto = boardService.updateBoard(boardForm);
+
+		return boardDto;
+	}
+	
+	/** 게시판 - 답글 페이지 이동 */
+	@RequestMapping(value = "/boardReply")
+	public String boardReply(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		return "board/boardReply";
+	}
+
+	/** 게시판 - 답글 등록 */
+	@RequestMapping(value = "/insertBoardReply")
+	@ResponseBody
+	public BoardDto insertBoardReply(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
+
+		BoardDto boardDto = boardService.insertBoardReply(boardForm);
 
 		return boardDto;
 	}

@@ -27,7 +27,7 @@
 					, UPD_USER_ID
 					, CAST( DATE_FORMAT( UPD_DATE, '%Y-%m-%d %H:%i:%s' ) AS CHAR(19) ) AS UPD_DATE  
 			   FROM BOARD.TB_BOARD
-			   ORDER BY BOARD_SEQ DESC			
+		       ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC
 			  ) T1
 		LIMIT #{limit} OFFSET #{offset}
 	
@@ -64,7 +64,14 @@
 	</select>
 		
 	<insert id="insertBoard" parameterType="com.spring.board.form.BoardForm">
-	
+			
+		<selectKey resultType="int" keyProperty="board_re_ref" order="BEFORE">
+			
+			SELECT IFNULL(MAX(BOARD_RE_REF), 0) + 1 
+			FROM BOARD.TB_BOARD
+			  
+		</selectKey>
+		
 		INSERT 
 		INTO BOARD.TB_BOARD 
 		(
@@ -81,7 +88,7 @@
 		) 
 		VALUES 
 		(
-			  0
+			  #{board_re_ref}
 			, 0
 			, 0
 			, #{board_writer}
@@ -145,6 +152,60 @@
  		WHERE BOARD_SEQ = #{board_seq}
 	
 	</delete>
+	
+	<select id="getBoardReplyInfo" parameterType="com.spring.board.form.BoardForm" resultType="com.spring.board.dto.BoardDto">
+	
+		SELECT BOARD_SEQ
+			 , BOARD_RE_REF
+			 , BOARD_RE_LEV
+			 , BOARD_RE_SEQ
+	    FROM TB_BOARD
+	    WHERE BOARD_SEQ = #{board_parent_seq}
+	
+	</select>
+	
+	<delete id="updateBoardReSeq" parameterType="com.spring.board.form.BoardForm">
+	
+		UPDATE TB_BOARD
+		   SET BOARD_RE_SEQ = BOARD_RE_SEQ + 1
+		     , UPD_USER_ID = 'NONMEMBER'
+		     , UPD_DATE = NOW()
+		 WHERE BOARD_RE_REF = #{board_re_ref} 
+	       AND BOARD_RE_SEQ > #{board_re_seq}
+	
+	</delete>
+	
+	<insert id="insertBoardReply" parameterType="com.spring.board.form.BoardForm">
+	
+		INSERT 
+		INTO BOARD.TB_BOARD 
+		(
+		  	  BOARD_RE_REF
+		  	, BOARD_RE_LEV
+		  	, BOARD_RE_SEQ
+		  	, BOARD_WRITER
+		  	, BOARD_SUBJECT
+		  	, BOARD_CONTENT
+		  	, INS_USER_ID
+		  	, INS_DATE
+		  	, UPD_USER_ID
+		  	, UPD_DATE
+		) 
+		VALUES 
+		(
+			  #{board_re_ref}
+			, #{board_re_lev} + 1
+			, #{board_re_seq} + 1
+			, #{board_writer}
+			, #{board_subject}
+			, #{board_content}
+			, 'NONMEMBER'
+			, NOW() 
+			, 'NONMEMBER'
+			, NOW() 
+		)
+	
+	</insert>
 	
 </mapper>
 
