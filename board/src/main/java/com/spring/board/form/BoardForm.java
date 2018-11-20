@@ -19,6 +19,7 @@ public class BoardForm extends CommonForm {
 	String upd_user_id;
 	Date upd_date;
 	String search_type;
+	String board_file;
 
 	public int getBoard_seq() {
 		return board_seq;
@@ -138,6 +139,14 @@ public class BoardForm extends CommonForm {
 
 	public void setSearch_type(String search_type) {
 		this.search_type = search_type;
+	}
+
+	public String getBoard_file() {
+		return board_file;
+	}
+
+	public void setBoard_file(String board_file) {
+		this.board_file = board_file;
 	}
 
 }

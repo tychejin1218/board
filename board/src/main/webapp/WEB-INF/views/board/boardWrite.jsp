@@ -10,6 +10,7 @@
 
 <!-- 공통 JavaScript -->
 <script type="text/javascript" src="/js/common/jquery.js"></script>
+<script type="text/javascript" src="/js/common/jquery.form.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function(){		
@@ -38,11 +39,11 @@
 			$("#board_content").focus();
 			return;
 		}
-		
+			
 		var yn = confirm("게시글을 등록하시겠습니까?");		
 		if(yn){
 				
-			$.ajax({	
+			$("#boardForm").ajaxSubmit({	
 				
 			    url		: "/board/insertBoard",
 			    data    : $("#boardForm").serialize(),
@@ -83,7 +84,7 @@
 	<div id="container">
 		<div class="inner">		
 			<h2>게시글 작성</h2>
-			<form id="boardForm" name="boardForm">
+			<form id="boardForm" name="boardForm" enctype="multipart/form-data">
 				<table width="100%" class="table02">
 				<caption><strong><span class="t_red">*</span> 표시는 필수입력 항목입니다.</strong></caption>
 				    <colgroup>
@@ -102,6 +103,10 @@
 						<tr>
 							<th>내용<span class="t_red">*</span></th>
 							<td><textarea id="board_content" name="board_content" cols="10" rows="5" class="textarea01"></textarea></td>
+						</tr>
+						<tr>
+							<th scope="row">첨부파일</th>
+							<td><input type="file" id="board_file" name="board_file"></td>
 						</tr>
 				    </tbody>
 				</table>

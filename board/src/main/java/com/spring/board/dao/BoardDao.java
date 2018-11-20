@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.spring.board.dto.BoardDto;
+import com.spring.board.form.BoardFileForm;
 import com.spring.board.form.BoardForm;
 
 @Repository
@@ -45,6 +46,11 @@ public class BoardDao {
 	/** 게시판 - 등록 */
 	public int insertBoard(BoardForm boardForm) throws Exception {
 		return sqlSession.insert(NAMESPACE + ".insertBoard", boardForm);
+	}
+	
+	/** 게시판 - 첨부파일 등록 */
+	public int insertBoardFile(BoardFileForm boardFileForm) throws Exception {
+		return sqlSession.insert(NAMESPACE + ".insertBoardFile", boardFileForm);
 	}
 
 	/** 게시판 - 등록 실패(트랜잭션 테스트) */

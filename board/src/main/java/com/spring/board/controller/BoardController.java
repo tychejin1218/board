@@ -66,7 +66,7 @@ public class BoardController {
 	@ResponseBody
 	public BoardDto insertBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
-		BoardDto boardDto = boardService.insertBoard(boardForm);
+		BoardDto boardDto = boardService.insertBoard(request, response, boardForm);
 
 		return boardDto;
 	}

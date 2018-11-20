@@ -39,4 +39,10 @@
     
     <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 
+	<!-- MultipartResolver 설정 -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="100000000" />
+        <beans:property name="maxInMemorySize" value="100000000" />
+    </beans:bean>
+    
 </beans:beans>

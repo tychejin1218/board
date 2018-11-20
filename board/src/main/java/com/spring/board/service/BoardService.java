@@ -1,16 +1,26 @@
 package com.spring.board.service;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.board.common.PagingUtil;
 import com.spring.board.common.ResultUtil;
 import com.spring.board.dao.BoardDao;
 import com.spring.board.dto.BoardDto;
 import com.spring.board.dto.CommonDto;
+import com.spring.board.form.BoardFileForm;
 import com.spring.board.form.BoardForm;
 import com.spring.board.form.CommonForm;
 
@@ -85,24 +95,19 @@ public class BoardService {
 	}
 
 	/** 게시판 - 등록 */
-	public BoardDto insertBoard(BoardForm boardForm) throws Exception {
+	public BoardDto insertBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
 		BoardDto boardDto = new BoardDto();
 
 		int insertCnt = 0;
 
-		// for (int a = 0; a < 1527; a++) {
-		//
-		// boardForm.setBoard_subject("제목_" + a);
-		// boardForm.setBoard_content("내용_" + a);
-		// boardForm.setBoard_writer("작성자_" + a);
-		//
-		// insertCnt = boardDao.insertBoard(boardForm);
-		// }
-
 		insertCnt = boardDao.insertBoard(boardForm);
 
-		// insertCnt = boardDao.insertBoardFail(boardForm);
+		List<BoardFileForm> list = getBoardFileInfo(request, boardForm);
+
+		for (int i = 0; i < list.size(); i++) {
+			boardDao.insertBoardFile(list.get(i));
+		}
 
 		if (insertCnt > 0) {
 			boardDto.setResult("SUCCESS");
@@ -111,6 +116,61 @@ public class BoardService {
 		}
 
 		return boardDto;
+	}
+
+	/** 게시판 - 첨부파일 정보 조회 */
+	public List<BoardFileForm> getBoardFileInfo(HttpServletRequest request, BoardForm boardForm) throws Exception {
+
+		String filePath = "C:\\board\\file";
+
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) (HttpServletRequest) request;
+		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+
+		MultipartFile multipartFile = null;
+		String fileName = null;
+		String fileExt = null;
+		String fileNameKey = null;
+		String fileSize = null;
+
+		List<BoardFileForm> list = new ArrayList<BoardFileForm>();
+		BoardFileForm boardFileForm = new BoardFileForm();
+
+		int boardSeq = boardForm.getBoard_seq();
+
+		System.out.println("boardSeq : " + boardSeq);
+
+		File file = new File(filePath);
+
+		if (file.exists() == false) {
+			file.mkdirs();
+		}
+
+		while (iterator.hasNext()) {
+
+			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+
+			if (multipartFile.isEmpty() == false) {
+
+				fileName = multipartFile.getOriginalFilename();
+				fileExt = fileName.substring(fileName.lastIndexOf("."));
+				fileNameKey = getRandomString() + fileExt;
+				fileSize = String.valueOf(multipartFile.getSize());
+
+				file = new File(filePath + "/" + fileNameKey);
+
+				multipartFile.transferTo(file);
+
+				boardFileForm = new BoardFileForm();
+				boardFileForm.setBoard_seq(boardSeq);
+				boardFileForm.setFile_name(fileName);
+				boardFileForm.setFile_name_key(fileNameKey);
+				boardFileForm.setFile_path(filePath);
+				boardFileForm.setFile_size(fileSize);
+				list.add(boardFileForm);
+			}
+		}
+
+		return list;
 	}
 
 	/** 게시판 - 삭제 */
@@ -156,11 +216,11 @@ public class BoardService {
 		boardForm.setBoard_re_lev(boardReplayInfo.getBoard_re_lev());
 		boardForm.setBoard_re_ref(boardReplayInfo.getBoard_re_ref());
 		boardForm.setBoard_re_seq(boardReplayInfo.getBoard_re_seq());
-		
+
 		int insertCnt = 0;
-		
+
 		insertCnt += boardDao.updateBoardReSeq(boardForm);
-		
+
 		insertCnt += boardDao.insertBoardReply(boardForm);
 
 		if (insertCnt > 0) {
@@ -171,4 +231,11 @@ public class BoardService {
 
 		return boardDto;
 	}
+
+	/** 32글자의 랜덤한 문자열(숫자포함) 생성 */
+	public static String getRandomString() {
+
+		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
+
 }
