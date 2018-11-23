@@ -1,9 +1,13 @@
 package com.spring.board.form;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class BoardForm extends CommonForm {
 
+	List<MultipartFile> files;
 	int board_seq;
 	int board_parent_seq;
 	int board_re_ref;
@@ -20,6 +24,14 @@ public class BoardForm extends CommonForm {
 	Date upd_date;
 	String search_type;
 	String board_file;
+
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
 
 	public int getBoard_seq() {
 		return board_seq;

@@ -43,7 +43,15 @@
 		var yn = confirm("게시글을 등록하시겠습니까?");		
 		if(yn){
 				
-			$("#boardForm").ajaxSubmit({	
+			 $("#boardForm").ajaxForm({
+		           
+				 success : function(obj) {
+			        	insertBoardCallback(obj);				
+			        },	       
+			        error 	: function(xhr, status, error) {}                             
+		    }).submit();
+			 
+			/* $("#boardForm").ajaxSubmit({	
 				
 			    url		: "/board/insertBoard",
 			    data    : $("#boardForm").serialize(),
@@ -56,7 +64,7 @@
 		        },	       
 		        error 	: function(xhr, status, error) {}
 		        
-		    });
+		    }); */
 		}
 	}
 	
@@ -84,7 +92,7 @@
 	<div id="container">
 		<div class="inner">		
 			<h2>게시글 작성</h2>
-			<form id="boardForm" name="boardForm" enctype="multipart/form-data">
+			<form id="boardForm" name="boardForm" action="/board/insertBoard" enctype="multipart/form-data" method="post">
 				<table width="100%" class="table02">
 				<caption><strong><span class="t_red">*</span> 표시는 필수입력 항목입니다.</strong></caption>
 				    <colgroup>
@@ -106,7 +114,7 @@
 						</tr>
 						<tr>
 							<th scope="row">첨부파일</th>
-							<td><input type="file" id="board_file" name="board_file"></td>
+							<td><input type="file" id="files[0]" name="files[0]"></td>
 						</tr>
 				    </tbody>
 				</table>

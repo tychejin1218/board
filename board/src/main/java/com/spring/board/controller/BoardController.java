@@ -1,12 +1,17 @@
 package com.spring.board.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.board.common.ResultUtil;
 import com.spring.board.dto.BoardDto;
@@ -64,9 +69,9 @@ public class BoardController {
 	/** 게시판 - 등록 */
 	@RequestMapping(value = "/insertBoard")
 	@ResponseBody
-	public BoardDto insertBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
-
-		BoardDto boardDto = boardService.insertBoard(request, response, boardForm);
+	public BoardDto insertBoard(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("uploadForm") BoardForm boardForm) throws Exception {
+					
+		BoardDto boardDto = boardService.insertBoard(boardForm);
 
 		return boardDto;
 	}
@@ -97,7 +102,7 @@ public class BoardController {
 
 		return boardDto;
 	}
-	
+
 	/** 게시판 - 답글 페이지 이동 */
 	@RequestMapping(value = "/boardReply")
 	public String boardReply(HttpServletRequest request, HttpServletResponse response) throws Exception {
