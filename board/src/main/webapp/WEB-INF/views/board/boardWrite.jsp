@@ -43,28 +43,19 @@
 		var yn = confirm("게시글을 등록하시겠습니까?");		
 		if(yn){
 				
-			 $("#boardForm").ajaxForm({
-		           
-				 success : function(obj) {
-			        	insertBoardCallback(obj);				
-			        },	       
-			        error 	: function(xhr, status, error) {}                             
-		    }).submit();
-			 
-			/* $("#boardForm").ajaxSubmit({	
-				
-			    url		: "/board/insertBoard",
-			    data    : $("#boardForm").serialize(),
-		        dataType: "JSON",
-		        cache   : false,
+			$("#boardForm").ajaxForm({
+		    
+				url		: "/board/insertBoard",
+				enctype	: "multipart/form-data",
+				cache   : false,
 		        async   : true,
-				type	: "POST",	
-		        success : function(obj) {
-		        	insertBoardCallback(obj);				
-		        },	       
-		        error 	: function(xhr, status, error) {}
-		        
-		    }); */
+				type	: "POST",
+				success : function(obj) {
+			    	insertBoardCallback(obj);				
+			    },	       
+			    error 	: function(xhr, status, error) {}
+			    
+		    }).submit();			 
 		}
 	}
 	

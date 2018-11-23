@@ -3,18 +3,13 @@ package com.spring.board.service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.board.common.PagingUtil;
 import com.spring.board.common.ResultUtil;
@@ -102,12 +97,17 @@ public class BoardService {
 
 		int insertCnt = 0;
 
+		int boardReRef = boardDao.getBoardReRef(boardForm);
+		boardForm.setBoard_re_ref(boardReRef);
+
+		System.out.println("boardReRef : " + boardReRef);
+		
 		insertCnt = boardDao.insertBoard(boardForm);
 
-		List<BoardFileForm> list = getBoardFileInfo(boardForm);
+		List<BoardFileForm> boardFileList = getBoardFileInfo(boardForm);
 
-		for (int i = 0; i < list.size(); i++) {
-			boardDao.insertBoardFile(list.get(i));
+		for (BoardFileForm boardFileForm : boardFileList) {
+			boardDao.insertBoardFile(boardFileForm);
 		}
 
 		if (insertCnt > 0) {
@@ -124,58 +124,54 @@ public class BoardService {
 
 		List<MultipartFile> files = boardForm.getFiles();
 
-		List<String> fileNames = new ArrayList<String>();
+		List<BoardFileForm> boardFileList = new ArrayList<BoardFileForm>();
 
-		if (null != files && files.size() > 0) {
+		BoardFileForm boardFileForm = new BoardFileForm();
+
+		String fileName = null;
+		String fileExt = null;
+		String fileNameKey = null;
+		String fileSize = null;
+		String filePath = "C:\\board\\file";
+		int boardSeq = boardForm.getBoard_seq();
+
+		if (files != null && files.size() > 0) {
+
+			File file = new File(filePath);
+
+			if (file.exists() == false) {
+				file.mkdirs();
+			}
+
 			for (MultipartFile multipartFile : files) {
 
-				String fileName = multipartFile.getOriginalFilename();
-				fileNames.add(fileName);
+				fileName = multipartFile.getOriginalFilename();
+				fileExt = fileName.substring(fileName.lastIndexOf("."));
+				fileNameKey = getRandomString() + fileExt;
+				fileSize = String.valueOf(multipartFile.getSize());
 
-				System.out.println("fileName :" + fileName);
-				// Handle file content - multipartFile.getInputStream()
+				System.out.println("boardSeq : " + boardSeq);
+				System.out.println("fileName : " + fileName);
+				System.out.println("fileExt : " + fileExt);
+				System.out.println("fileNameKey : " + fileNameKey);
+				System.out.println("fileSize : " + fileSize);
+				System.out.println("filePath : " + filePath);
 
+				file = new File(filePath + "/" + fileNameKey);
+
+				multipartFile.transferTo(file);
+
+				boardFileForm = new BoardFileForm();
+				boardFileForm.setBoard_seq(boardSeq);
+				boardFileForm.setFile_name(fileName);
+				boardFileForm.setFile_name_key(fileNameKey);
+				boardFileForm.setFile_path(filePath);
+				boardFileForm.setFile_size(fileSize);
+				boardFileList.add(boardFileForm);
 			}
 		}
 
-		String filePath = "C:\\board\\file";
-
-		/*
-		 * MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-		 * Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-		 * 
-		 * MultipartFile multipartFile = null; String fileName = null; String fileExt = null; String fileNameKey = null;
-		 * String fileSize = null;
-		 * 
-		 * List<BoardFileForm> list = new ArrayList<BoardFileForm>(); BoardFileForm boardFileForm = new BoardFileForm();
-		 * 
-		 * int boardSeq = boardForm.getBoard_seq();
-		 * 
-		 * System.out.println("boardSeq : " + boardSeq);
-		 * 
-		 * File file = new File(filePath);
-		 * 
-		 * if (file.exists() == false) { file.mkdirs(); }
-		 * 
-		 * while (iterator.hasNext()) {
-		 * 
-		 * multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-		 * 
-		 * if (multipartFile.isEmpty() == false) {
-		 * 
-		 * fileName = multipartFile.getOriginalFilename(); fileExt = fileName.substring(fileName.lastIndexOf("."));
-		 * fileNameKey = getRandomString() + fileExt; fileSize = String.valueOf(multipartFile.getSize());
-		 * 
-		 * file = new File(filePath + "/" + fileNameKey);
-		 * 
-		 * multipartFile.transferTo(file);
-		 * 
-		 * boardFileForm = new BoardFileForm(); boardFileForm.setBoard_seq(boardSeq);
-		 * boardFileForm.setFile_name(fileName); boardFileForm.setFile_name_key(fileNameKey);
-		 * boardFileForm.setFile_path(filePath); boardFileForm.setFile_size(fileSize); list.add(boardFileForm); } }
-		 */
-
-		return null;
+		return boardFileList;
 	}
 
 	/** 게시판 - 삭제 */

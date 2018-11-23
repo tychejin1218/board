@@ -63,13 +63,19 @@
 	
 	</select>
 		
-	<insert id="insertBoard" parameterType="com.spring.board.form.BoardForm"  useGeneratedKeys="true" keyProperty="idx">
-			
-		<selectKey resultType="int" keyProperty="board_re_ref" order="BEFORE">
-			
-			SELECT IFNULL(MAX(BOARD_RE_REF), 0) + 1 
-			FROM BOARD.TB_BOARD
-			  
+	<select id="getBoardReRef" parameterType="com.spring.board.form.BoardForm" resultType="int">
+	
+		SELECT IFNULL(MAX(BOARD_RE_REF), 0) + 1
+		FROM BOARD.TB_BOARD
+	
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.spring.board.form.BoardForm">
+		
+		<selectKey resultType="int" keyProperty="board_seq" order="AFTER">
+
+			SELECT LAST_INSERT_ID()
+
 		</selectKey>
 		
 		INSERT 
@@ -99,7 +105,7 @@
 			, 'NONMEMBER'
 			, NOW() 
 		)
-	
+			
 	</insert>
 	
 	<insert id="insertBoardFile" parameterType="com.spring.board.form.BoardFileForm">
@@ -115,7 +121,8 @@
 		INSERT 
 		INTO TB_BOARD_FILE
 		(
-			  FILE_NO
+			  BOARD_SEQ
+			, FILE_NO
 			, FILE_NAME_KEY
 			, FILE_NAME
 			, FILE_PATH
@@ -128,7 +135,8 @@
 		)
 		VALUES
 		(
-			  #{file_no}
+			  #{board_seq}
+			, #{file_no}
 			, #{file_name_key}
 			, #{file_name}
 			, #{file_path}

@@ -43,6 +43,12 @@ public class BoardDao {
 		return sqlSession.selectOne(NAMESPACE + ".getBoardDetail", boardForm);
 	}
 
+	/** 게시판 - 그룹 번호 조회 */
+	public int getBoardReRef(BoardForm boardForm) throws Exception {
+
+		return sqlSession.selectOne(NAMESPACE + ".getBoardReRef", boardForm);
+	}
+	
 	/** 게시판 - 등록 */
 	public int insertBoard(BoardForm boardForm) throws Exception {
 		return sqlSession.insert(NAMESPACE + ".insertBoard", boardForm);

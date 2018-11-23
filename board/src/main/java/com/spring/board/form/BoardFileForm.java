@@ -1,9 +1,6 @@
 package com.spring.board.form;
 
 import java.util.Date;
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
 
 public class BoardFileForm extends CommonForm {
 
