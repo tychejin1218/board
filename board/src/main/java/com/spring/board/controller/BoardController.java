@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -65,8 +64,8 @@ public class BoardController {
 	/** 게시판 - 등록 */
 	@RequestMapping(value = "/insertBoard")
 	@ResponseBody
-	public BoardDto insertBoard(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("uploadForm") BoardForm boardForm) throws Exception {
-					
+	public BoardDto insertBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
+
 		BoardDto boardDto = boardService.insertBoard(boardForm);
 
 		return boardDto;

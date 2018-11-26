@@ -83,7 +83,7 @@
 	<div id="container">
 		<div class="inner">		
 			<h2>게시글 작성</h2>
-			<form id="boardForm" name="boardForm" action="/board/insertBoard" enctype="multipart/form-data" method="post">
+			<form id="boardForm" name="boardForm" action="/board/insertBoard" enctype="multipart/form-data" method="post" onsubmit="return false;">
 				<table width="100%" class="table02">
 				<caption><strong><span class="t_red">*</span> 표시는 필수입력 항목입니다.</strong></caption>
 				    <colgroup>

@@ -8,7 +8,6 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.board.common.PagingUtil;
@@ -91,7 +90,7 @@ public class BoardService {
 	}
 
 	/** 게시판 - 등록 */
-	public BoardDto insertBoard(@ModelAttribute("uploadForm") BoardForm boardForm) throws Exception {
+	public BoardDto insertBoard(BoardForm boardForm) throws Exception {
 
 		BoardDto boardDto = new BoardDto();
 
@@ -100,8 +99,6 @@ public class BoardService {
 		int boardReRef = boardDao.getBoardReRef(boardForm);
 		boardForm.setBoard_re_ref(boardReRef);
 
-		System.out.println("boardReRef : " + boardReRef);
-		
 		insertCnt = boardDao.insertBoard(boardForm);
 
 		List<BoardFileForm> boardFileList = getBoardFileInfo(boardForm);
@@ -128,17 +125,19 @@ public class BoardService {
 
 		BoardFileForm boardFileForm = new BoardFileForm();
 
+		int boardSeq = boardForm.getBoard_seq();
 		String fileName = null;
 		String fileExt = null;
 		String fileNameKey = null;
 		String fileSize = null;
+		// 파일이 저장될 Path 설정
 		String filePath = "C:\\board\\file";
-		int boardSeq = boardForm.getBoard_seq();
-
+		
 		if (files != null && files.size() > 0) {
 
 			File file = new File(filePath);
-
+			
+			// 디렉토리가 없으면 생성
 			if (file.exists() == false) {
 				file.mkdirs();
 			}
@@ -147,16 +146,11 @@ public class BoardService {
 
 				fileName = multipartFile.getOriginalFilename();
 				fileExt = fileName.substring(fileName.lastIndexOf("."));
+				// 파일명 변경(uuid로 암호화) + 확장자
 				fileNameKey = getRandomString() + fileExt;
 				fileSize = String.valueOf(multipartFile.getSize());
 
-				System.out.println("boardSeq : " + boardSeq);
-				System.out.println("fileName : " + fileName);
-				System.out.println("fileExt : " + fileExt);
-				System.out.println("fileNameKey : " + fileNameKey);
-				System.out.println("fileSize : " + fileSize);
-				System.out.println("filePath : " + filePath);
-
+				// 설정한 Path에 파일 저장
 				file = new File(filePath + "/" + fileNameKey);
 
 				multipartFile.transferTo(file);
