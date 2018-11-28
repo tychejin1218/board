@@ -59,13 +59,6 @@ public class BoardService {
 		return resultUtil;
 	}
 
-	/** 게시판 - 목록 조회 */
-	/*
-	 * public List<BoardDto> getBoardList(BoardForm boardForm) throws Exception {
-	 * 
-	 * return boardDao.getBoardList(boardForm); }
-	 */
-
 	/** 게시판 - 상세 조회 */
 	public BoardDto getBoardDetail(BoardForm boardForm) throws Exception {
 
@@ -75,16 +68,15 @@ public class BoardService {
 
 		if ("S".equals(searchType)) {
 
-			int updateCnt = boardDao.updateBoardHits(boardForm);
-
-			if (updateCnt > 0) {
-				boardDto = boardDao.getBoardDetail(boardForm);
-			}
-
-		} else {
-
-			boardDto = boardDao.getBoardDetail(boardForm);
+			boardDao.updateBoardHits(boardForm);
 		}
+
+		boardDto = boardDao.getBoardDetail(boardForm);
+
+		BoardFileForm boardFileForm = new BoardFileForm();
+		boardFileForm.setBoard_seq(boardForm.getBoard_seq());
+
+		boardDto.setFiles(boardDao.getBoardFileList(boardFileForm));
 
 		return boardDto;
 	}
@@ -132,11 +124,11 @@ public class BoardService {
 		String fileSize = null;
 		// 파일이 저장될 Path 설정
 		String filePath = "C:\\board\\file";
-		
+
 		if (files != null && files.size() > 0) {
 
 			File file = new File(filePath);
-			
+
 			// 디렉토리가 없으면 생성
 			if (file.exists() == false) {
 				file.mkdirs();
@@ -232,5 +224,4 @@ public class BoardService {
 
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
-
 }

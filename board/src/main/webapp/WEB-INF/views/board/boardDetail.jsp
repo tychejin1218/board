@@ -72,7 +72,7 @@
 	
 	/** 게시판 - 상세 조회  콜백 함수 */
 	function getBoardDetailCallback(obj){
-		
+		console.log(obj);
 		var str = "";
 		
 		if(obj != null){								
@@ -90,7 +90,11 @@
 			var insDate 		= obj.ins_date; 
 			var updUserId 		= obj.upd_user_id;
 			var updDate 		= obj.upd_date;
-					
+			var files			= obj.files;		
+			var filesLen		= files.length;
+			
+			console.log("filesLen : " + filesLen);
+			
 			str += "<tr>";
 			str += "<th>제목</th>";
 			str += "<td>"+ boardSubject +"</td>";
@@ -107,6 +111,28 @@
 			str += "<th>내용</th>";
 			str += "<td colspan='3'>"+ boardSubject +"</td>";
 			str += "</tr>";
+			
+			if(filesLen > 0){
+			
+				for(var a=0; a<filesLen; a++){
+					
+					var boardSeq	= files[a].board_seq;
+					var fileNo 		= files[a].file_no;
+					var fileNameKey = files[a].file_name_key;
+					var fileName 	= files[a].file_name;
+					var filePath 	= files[a].file_path;
+					var fileSize 	= files[a].file_size;
+					var remark 		= files[a].remark;
+					var delYn 		= files[a].del_yn;
+					var insUserId 	= files[a].ins_user_id;
+					var insDate 	= files[a].ins_date;
+					var updUserId 	= files[a].upd_user_id;
+					var updDate 	= files[a].upd_date;
+					
+					console.log("fileName : " + fileName);
+				}	
+			}
+			
 			
 		} else {
 			

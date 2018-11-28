@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.spring.board.dto.BoardDto;
+import com.spring.board.dto.BoardFileDto;
 import com.spring.board.form.BoardFileForm;
 import com.spring.board.form.BoardForm;
 
@@ -41,6 +42,12 @@ public class BoardDao {
 	public BoardDto getBoardDetail(BoardForm boardForm) throws Exception {
 
 		return sqlSession.selectOne(NAMESPACE + ".getBoardDetail", boardForm);
+	}
+	
+	/** 게시판 - 첨부파일 조회 */
+	public List<BoardFileDto> getBoardFileList(BoardFileForm boardFileForm) throws Exception {
+
+		return sqlSession.selectList(NAMESPACE + ".getBoardFileList", boardFileForm);
 	}
 
 	/** 게시판 - 그룹 번호 조회 */
