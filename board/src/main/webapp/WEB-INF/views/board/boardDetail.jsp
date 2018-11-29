@@ -44,6 +44,16 @@
 		location.href = "/board/boardReply?boardSeq="+ boardSeq;
 	}
 	
+	/** 게시판 - 첨부파일 다운로드 */
+	function fileDownload(fileNameKey, fileName, filePath){
+		
+		console.log("fileNameKey : " + fileNameKey );
+		console.log("fileName : " + fileName );
+		console.log("filePath : " + filePath );
+		
+		location.href = "/board/fileDownload?fileNameKey="+fileNameKey+"&fileName="+fileName+"&filePath="+filePath;
+	}
+	
 	/** 게시판 - 상세 조회  */
 	function getBoardDetail(boardSeq){
 		
@@ -130,9 +140,13 @@
 					var updDate 	= files[a].upd_date;
 					
 					console.log("fileName : " + fileName);
+					
+					str += "<th>첨부파일</th>";
+					//str += "<td onclick='javascript:fileDownload(\"" + fileNameKey + "\", \"" + fileName + "\", \"" + filePath + "\");' style='cursor:Pointer'>"+ fileName +"</td>";
+					str += "<td><a href='/board/fileDownload?fileNameKey="+encodeURI(fileNameKey)+"&fileName="+encodeURI(fileName)+"&filePath="+encodeURI(filePath)+"'>" + fileName + "</a></td>";
+					str += "</tr>";
 				}	
-			}
-			
+			}			
 			
 		} else {
 			
