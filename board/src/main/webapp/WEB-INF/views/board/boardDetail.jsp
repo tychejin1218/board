@@ -46,11 +46,7 @@
 	
 	/** 게시판 - 첨부파일 다운로드 */
 	function fileDownload(fileNameKey, fileName, filePath){
-		
-		console.log("fileNameKey : " + fileNameKey );
-		console.log("fileName : " + fileName );
-		console.log("filePath : " + filePath );
-		
+			
 		location.href = "/board/fileDownload?fileNameKey="+fileNameKey+"&fileName="+fileName+"&filePath="+filePath;
 	}
 	
@@ -82,7 +78,7 @@
 	
 	/** 게시판 - 상세 조회  콜백 함수 */
 	function getBoardDetailCallback(obj){
-		console.log(obj);
+		
 		var str = "";
 		
 		if(obj != null){								
@@ -102,9 +98,7 @@
 			var updDate 		= obj.upd_date;
 			var files			= obj.files;		
 			var filesLen		= files.length;
-			
-			console.log("filesLen : " + filesLen);
-			
+						
 			str += "<tr>";
 			str += "<th>제목</th>";
 			str += "<td>"+ boardSubject +"</td>";
