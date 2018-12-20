@@ -43,13 +43,18 @@
 		var yn = confirm("게시글을 등록하시겠습니까?");		
 		if(yn){
 				
+			var filesChk = $("input[name='files[0]']").val();
+			if(filesChk == ""){
+				$("input[name='files[0]']").remove();
+			}
+			
 			$("#boardForm").ajaxForm({
 		    
 				url		: "/board/insertBoard",
 				enctype	: "multipart/form-data",
 				cache   : false,
 		        async   : true,
-				type	: "POST",
+				type	: "POST",					 	
 				success : function(obj) {
 			    	insertBoardCallback(obj);				
 			    },	       
@@ -105,7 +110,7 @@
 						</tr>
 						<tr>
 							<th scope="row">첨부파일</th>
-							<td><input type="file" id="files[0]" name="files[0]"></td>
+							<td><input type="file" id="files[0]" name="files[0]" value=""></td>
 						</tr>
 				    </tbody>
 				</table>

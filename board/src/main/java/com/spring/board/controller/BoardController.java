@@ -121,17 +121,16 @@ public class BoardController {
 	}
 
 	/** 게시판 - 첨부파일 다운로드 */
-	@RequestMapping("/fileDownload")	                  
-	public ModelAndView fileDownload(@RequestParam("fileNameKey") String fileNameKey
-									,@RequestParam("fileName") String fileName
-								    ,@RequestParam("filePath") String filePath) throws Exception {
-	 	 
-	    /** 첨부파일 정보 조회 */
-	    Map<String, Object> fileInfo = new HashMap<String, Object>();
-	    fileInfo.put("fileNameKey", fileNameKey);
-	    fileInfo.put("fileName", fileName);
-	    fileInfo.put("filePath", filePath);
-	 
-	    return new ModelAndView("fileDownloadUtil", "fileInfo", fileInfo);
+	@RequestMapping("/fileDownload")
+	public ModelAndView fileDownload(@RequestParam("fileNameKey") String fileNameKey, @RequestParam("fileName") String fileName,
+			@RequestParam("filePath") String filePath) throws Exception {
+
+		/** 첨부파일 정보 조회 */
+		Map<String, Object> fileInfo = new HashMap<String, Object>();
+		fileInfo.put("fileNameKey", fileNameKey);
+		fileInfo.put("fileName", fileName);
+		fileInfo.put("filePath", filePath);
+
+		return new ModelAndView("fileDownloadUtil", "fileInfo", fileInfo);
 	}
 }
