@@ -59,7 +59,7 @@ public class PagingUtil {
 		pagination += "<a href='javascript:" + functionName + "(" + totalLastPage + ");' class=\"direction_right01\">[>>]</a>";
 		pagination += "</div>";
 
-		int offset = ((currentPage - 1) * countPerPage); // 한 화면의 표출되는 게시물의 시작 번호 (쿼리 조건절)
+		int offset = ((currentPage - 1) * countPerList); // 한 화면의 표출되는 게시물의 시작 번호 (쿼리 조건절)
 
 		// LIMIT는 가져올 row의 수, OFFSET은 몇 번째 row부터 가져올지를 결정
 		commonDto.setLimit(countPerList);
