@@ -7,5 +7,4 @@
 >> ###### Maven 3.5.4
 
 > #### 개발 설명
->> ###### http://blog.naver.com/tychejin/221339985910
 >> ###### http://tychejin.tistory.com/10
