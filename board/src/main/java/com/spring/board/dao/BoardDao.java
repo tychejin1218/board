@@ -98,4 +98,10 @@ public class BoardDao {
 	public int insertBoardReply(BoardForm boardForm) throws Exception {
 		return sqlSession.insert(NAMESPACE + ".insertBoardReply", boardForm);
 	}
+	
+	/** 게시판 - 첨부파일 삭제 */
+	public int deleteBoardFile(BoardFileForm boardFileForm) throws Exception {
+		return sqlSession.update(NAMESPACE + ".deleteBoardFile", boardFileForm);
+	}
+	
 }

@@ -133,11 +133,9 @@
 					var updUserId 	= files[a].upd_user_id;
 					var updDate 	= files[a].upd_date;
 					
-					console.log("fileName : " + fileName);
-					
 					str += "<th>첨부파일</th>";
 					//str += "<td onclick='javascript:fileDownload(\"" + fileNameKey + "\", \"" + fileName + "\", \"" + filePath + "\");' style='cursor:Pointer'>"+ fileName +"</td>";
-					str += "<td><a href='/board/fileDownload?fileNameKey="+encodeURI(fileNameKey)+"&fileName="+encodeURI(fileName)+"&filePath="+encodeURI(filePath)+"'>" + fileName + "</a></td>";
+					str += "<td colspan='3'><a href='/board/fileDownload?fileNameKey="+encodeURI(fileNameKey)+"&fileName="+encodeURI(fileName)+"&filePath="+encodeURI(filePath)+"'>" + fileName + "</a></td>";
 					str += "</tr>";
 				}	
 			}			

@@ -281,6 +281,17 @@
 	
 	</insert>
 	
+	<delete id="deleteBoardFile" parameterType="com.spring.board.form.BoardFileForm">
+	
+		UPDATE BOARD.TB_BOARD_FILE 
+		   SET DEL_YN = 'Y'
+		     , UPD_USER_ID = 'NONMEMBER'
+		     , UPD_DATE = NOW()
+ 		WHERE BOARD_SEQ = #{board_seq}
+ 		  AND FILE_NO = #{file_no}
+	
+	</delete>
+	
 </mapper>
 
 

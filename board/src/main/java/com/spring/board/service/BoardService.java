@@ -181,9 +181,35 @@ public class BoardService {
 
 		BoardDto boardDto = new BoardDto();
 
-		int deleteCnt = boardDao.updateBoard(boardForm);
+		int updateCnt = boardDao.updateBoard(boardForm);
 
-		if (deleteCnt > 0) {
+		String deleteFile = boardForm.getDelete_file();
+		System.out.println("deleteFile : " + deleteFile);
+
+		if (!"".equals(deleteFile)) {
+
+			String[] deleteFileInfo = deleteFile.split("!");
+
+			int boardSeq = Integer.parseInt(deleteFileInfo[0]);
+			int fileNo = Integer.parseInt(deleteFileInfo[1]);
+
+			System.out.println("boardSeq : " + boardSeq);
+			System.out.println("fileNo : " + fileNo);
+
+			BoardFileForm deleteBoardFileForm = new BoardFileForm();
+			deleteBoardFileForm.setBoard_seq(boardSeq);
+			deleteBoardFileForm.setFile_no(fileNo);
+			
+			boardDao.deleteBoardFile(deleteBoardFileForm);
+		}
+
+		/*List<BoardFileForm> boardFileList = getBoardFileInfo(boardForm);
+
+		for (BoardFileForm boardFileForm : boardFileList) {
+			boardDao.insertBoardFile(boardFileForm);
+		}*/
+		
+		if (updateCnt > 0) {
 			boardDto.setResult("SUCCESS");
 		} else {
 			boardDto.setResult("FAIL");
