@@ -17,6 +17,7 @@
 
 <!-- 공통 JavaScript -->
 <script type="text/javascript" src="/js/common/jquery.js"></script>
+<script type="text/javascript" src="/js/common/jquery.form.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function(){		
@@ -100,7 +101,7 @@
 					var updDate 	= files[a].upd_date;
 					
 					fileStr += "<a href='/board/fileDownload?fileNameKey="+encodeURI(fileNameKey)+"&fileName="+encodeURI(fileName)+"&filePath="+encodeURI(filePath)+"'>" + fileName + "</a>";
-					fileStr += "<button type='button' class='btn black ml15' onclick='javascript:setDeleteFile("+ boardSeq +", "+ fileNo +")'>X</button>";
+					fileStr += "<button type='button' class='btn black ml15' style='padding:3px 5px 6px 5px;' onclick='javascript:setDeleteFile("+ boardSeq +", "+ fileNo +")'>X</button>";
 				}			
 								
 			} else {
@@ -119,8 +120,8 @@
 	/** 게시판 - 수정  */
 	function updateBoard(){
 
-		var boardSubject	= $("#board_subject").val();
-		var boardContent 	= $("#board_content").val();
+		var boardSubject = $("#board_subject").val();
+		var boardContent = $("#board_content").val();
 			
 		if (boardSubject == ""){			
 			alert("제목을 입력해주세요.");
@@ -137,20 +138,24 @@
 		var yn = confirm("게시글을 수정하시겠습니까?");		
 		if(yn){
 				
-			$.ajax({	
-				
-			    url		: "/board/updateBoard",
-			    data    : $("#boardForm").serialize(),
-		        dataType: "JSON",
-		        cache   : false,
+			var filesChk = $("input[name='files[0]']").val();
+			if(filesChk == ""){
+				$("input[name='files[0]']").remove();
+			}
+			
+			$("#boardForm").ajaxForm({
+		    
+				url		: "/board/updateBoard",
+				enctype	: "multipart/form-data",
+				cache   : false,
 		        async   : true,
-				type	: "POST",	
-		        success : function(obj) {
-		        	updateBoardCallback(obj);				
-		        },	       
-		        error 	: function(xhr, status, error) {}
-		        
-		    });
+				type	: "POST",					 	
+				success : function(obj) {
+					updateBoardCallback(obj);				
+			    },	       
+			    error 	: function(xhr, status, error) {}
+			    
+		    }).submit();
 		}
 	}
 	
@@ -174,9 +179,11 @@
 	/** 게시판 - 삭제할 첨부파일 정보 */
 	function setDeleteFile(boardSeq, fileSeq){
 		
-		var deleteFile = boardSeq + "!" + fileSeq;
-		
+		var deleteFile = boardSeq + "!" + fileSeq;		
 		$("#delete_file").val(deleteFile);
+				
+		var fileStr = "<input type='file' id='files[0]' name='files[0]' value=''>";		
+		$("#file_td").html(fileStr);		
 	}
 		
 </script>
@@ -186,7 +193,7 @@
 	<div id="container">
 		<div class="inner">	
 			<h2>게시글 상세</h2>
-			<form id="boardForm" name="boardForm">	
+			<form id="boardForm" name="boardForm" action="/board/updateBoard" enctype="multipart/form-data" method="post" onsubmit="return false;">	
 				<table width="100%" class="table02">
 				<caption><strong><span class="t_red">*</span> 표시는 필수입력 항목입니다.</strong></caption>
 				    <colgroup>
