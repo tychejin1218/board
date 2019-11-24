@@ -86,7 +86,11 @@ public class BoardController {
 	@ResponseBody
 	public BoardDto deleteBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
+		MDC.put("seq", String.valueOf(boardForm.getBoard_seq()));
+		
 		BoardDto boardDto = boardService.deleteBoard(boardForm);
+		
+		MDC.remove("seq");
 
 		return boardDto;
 	}
@@ -103,7 +107,11 @@ public class BoardController {
 	@ResponseBody
 	public BoardDto updateBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
+		MDC.put("seq", String.valueOf(boardForm.getBoard_seq()));
+		
 		BoardDto boardDto = boardService.updateBoard(boardForm);
+		
+		MDC.remove("seq");
 
 		return boardDto;
 	}
@@ -120,7 +128,11 @@ public class BoardController {
 	@ResponseBody
 	public BoardDto insertBoardReply(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
+		MDC.put("seq", String.valueOf(boardForm.getBoard_seq()));
+		
 		BoardDto boardDto = boardService.insertBoardReply(boardForm);
+		
+		MDC.remove("seq");
 
 		return boardDto;
 	}

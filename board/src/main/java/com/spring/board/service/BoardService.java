@@ -169,6 +169,8 @@ public class BoardService {
 
 	/** 게시판 - 삭제 */
 	public BoardDto deleteBoard(BoardForm boardForm) throws Exception {
+		
+		logger.debug("==================== deleteBoard START ====================");
 
 		BoardDto boardDto = new BoardDto();
 
@@ -180,12 +182,16 @@ public class BoardService {
 			boardDto.setResult("FAIL");
 		}
 
+		logger.debug("==================== deleteBoard START ====================");
+		
 		return boardDto;
 	}
 
 	/** 게시판 - 수정 */
 	public BoardDto updateBoard(BoardForm boardForm) throws Exception {
 
+		logger.debug("==================== updateBoard START ====================");
+		
 		BoardDto boardDto = new BoardDto();
 
 		int updateCnt = boardDao.updateBoard(boardForm);
@@ -216,6 +222,8 @@ public class BoardService {
 			boardDto.setResult("FAIL");
 		}
 
+		logger.debug("==================== updateBoard START ====================");
+		
 		return boardDto;
 	}
 
