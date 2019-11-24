@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +55,11 @@ public class BoardController {
 	@ResponseBody
 	public BoardDto getBoardDetail(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
+		MDC.put("seq", String.valueOf(boardForm.getBoard_seq()));
+
 		BoardDto boardDto = boardService.getBoardDetail(boardForm);
+
+		MDC.remove("seq");
 
 		return boardDto;
 	}

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +23,8 @@ import com.spring.board.form.CommonForm;
 
 @Service
 public class BoardService {
+
+	protected final Logger logger = LoggerFactory.getLogger(BoardService.class);
 
 	@Autowired
 	private BoardDao boardDao;
@@ -62,6 +66,8 @@ public class BoardService {
 	/** 게시판 - 상세 조회 */
 	public BoardDto getBoardDetail(BoardForm boardForm) throws Exception {
 
+		logger.debug("==================== getBoardDetail START ====================");
+
 		BoardDto boardDto = new BoardDto();
 
 		String searchType = boardForm.getSearch_type();
@@ -77,6 +83,8 @@ public class BoardService {
 		boardFileForm.setBoard_seq(boardForm.getBoard_seq());
 
 		boardDto.setFiles(boardDao.getBoardFileList(boardFileForm));
+
+		logger.debug("==================== getBoardDetail END ====================");
 
 		return boardDto;
 	}
@@ -193,7 +201,7 @@ public class BoardService {
 			BoardFileForm deleteBoardFileForm = new BoardFileForm();
 			deleteBoardFileForm.setBoard_seq(boardSeq);
 			deleteBoardFileForm.setFile_no(fileNo);
-			
+
 			boardDao.deleteBoardFile(deleteBoardFileForm);
 		}
 
@@ -201,7 +209,7 @@ public class BoardService {
 		for (BoardFileForm boardFileForm : boardFileList) {
 			boardDao.insertBoardFile(boardFileForm);
 		}
-		
+
 		if (updateCnt > 0) {
 			boardDto.setResult("SUCCESS");
 		} else {
