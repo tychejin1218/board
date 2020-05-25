@@ -1,11 +1,57 @@
-## [Spring] 게시판 샘플 
-> #### 개발 환경
->> ###### IDE(Eclipse Neon) 
->> ###### JDK1.8
->> ###### Tomcat 8.5
->> ###### Spring 4.3.6
->> ###### Maven 3.5.4
->> ###### MySQL 5.7.21
+## [Spring] 게시판 만들기 
+- #### 개요
+  - ##### Spring MVC Project를 이용하여 간단한 게시판을 만드는 과정
+  
+- #### 개발 환경
+  - ###### IDE(Eclipse Neon) 
+  - ###### JDK1.8
+  - ###### Tomcat 8.5
+  - ###### Spring 4.3.6
+  - ###### Maven 3.5.4
+  - ###### MySQL 5.7.21
 
-> #### 개발 설명
->> ###### http://tychejin.tistory.com/10
+- #### 개발 설명
+  - ##### [Spring] 게시판 만들기(1) - 웹 개발 환경 다운로드 및 설치
+    - ###### https://tychejin.tistory.com/10
+  - ##### [Spring] 게시판 만들기(2) - 이클립스(Eclipse)와 톰캣(Tomcat) 연동하기
+    - ###### https://tychejin.tistory.com/11
+  - ##### [Spring] 게시판 만들기(3) - 이클립스(Eclipse)와 메이븐(Maven) 연동하기
+    - ###### https://tychejin.tistory.com/12
+  - ##### [Spring] 게시판 만들기(4) - STS(Spring Tool Suite) 설치
+    - ###### https://tychejin.tistory.com/13
+  - ##### [Spring] 게시판 만들기(5) - Spring MVC 프로젝트 생성
+    - ###### https://tychejin.tistory.com/14
+  - ##### [Spring] 게시판 만들기(6) - MySQL 다운로드 및 설치하기
+    - ###### https://tychejin.tistory.com/15
+  - ##### [Spring] 게시판 만들기(7) - MySQL SCHEMA 및 TALBE 생성하기
+    - ###### https://tychejin.tistory.com/16
+  - ##### [Spring] 게시판 만들기(8) - 디렉토리 구조 및 설정 파일 변경(web.xml, *-context.xml)
+    - ###### https://tychejin.tistory.com/17
+  - ##### [Spring] 게시판 만들기(9) - MySQL 연동
+    - ###### https://tychejin.tistory.com/19
+  - ##### [Spring] 게시판 만들기(10) - log4j->logback으로 변경
+    - ###### https://tychejin.tistory.com/20
+  - ##### [Spring] 게시판 만들기(11) - 인터셉터(Interceptor) 설정
+    - ###### https://tychejin.tistory.com/21
+  - ##### [Spring] 게시판 만들기(12) - Mybatis 연동
+    - ###### https://tychejin.tistory.com/22
+  - ##### [Spring] 게시판 만들기(13) - mapper 및 json 설정
+    - ###### https://tychejin.tistory.com/23
+  - ##### [Spring] 게시판 만들기(14) - 게시글 조회(SELECT)
+    - ###### https://tychejin.tistory.com/24
+  - ##### [Spring] 게시판 만들기(15) - 게시글 등록(INSERT), 수정(UPDATE), 삭제(DELETE), 상세 조회(SELECT)
+    - ###### https://tychejin.tistory.com/25
+  - ##### [Spring] 게시판 만들기(16) - 트랜잭션(Transaction) 설정
+    - ###### https://tychejin.tistory.com/26
+  - ##### [Spring] 게시판 만들기(17) - 페이징(Paging) 처리
+    - ###### https://tychejin.tistory.com/27
+  - ##### [Spring] 게시판 만들기(18) - 계층형 게시판(답글쓰기) 적용
+    - ###### https://tychejin.tistory.com/28
+  - ##### [Spring] 게시판 만들기(19) - 파일 업로드(MultipartHttpServletRequest)
+    - ###### https://tychejin.tistory.com/29
+  - ##### [Spring] 게시판 만들기(20) - 파일 다운로드(BeanNameViewResolver)
+    - ###### https://tychejin.tistory.com/30
+  - ##### [Spring] 게시판 만들기(21) - 게시글 수정(첨부파일 등록 및 삭제)
+    - ###### https://tychejin.tistory.com/133
+  - ##### [Spring] 게시판 만들기(22) - MDC(Mapped Diagnostic Context) 설정
+    - ###### https://tychejin.tistory.com/143
