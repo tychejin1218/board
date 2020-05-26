@@ -3,12 +3,12 @@
   - ##### Spring MVC Project를 이용하여 간단한 게시판을 만드는 과정
   
 - #### 개발 환경
-  - ###### IDE(Eclipse Neon) 
-  - ###### JDK1.8
-  - ###### Tomcat 8.5
-  - ###### Spring 4.3.6
-  - ###### Maven 3.5.4
-  - ###### MySQL 5.7.21
+  - ##### IDE(Eclipse Neon) 
+  - ##### JDK1.8
+  - ##### Tomcat 8.5
+  - ##### Spring 4.3.6
+  - ##### Maven 3.5.4
+  - ##### MySQL 5.7.21
 
 - #### 개발 설명
   - ##### [Spring] 게시판 만들기(1) - 웹 개발 환경 다운로드 및 설치
