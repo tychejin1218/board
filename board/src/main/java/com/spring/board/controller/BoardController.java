@@ -87,9 +87,9 @@ public class BoardController {
 	public BoardDto deleteBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
 		MDC.put("TRANSACTION_ID", String.valueOf(boardForm.getBoard_seq()));
-		
+
 		BoardDto boardDto = boardService.deleteBoard(boardForm);
-		
+
 		MDC.remove("TRANSACTION_ID");
 
 		return boardDto;
@@ -108,9 +108,9 @@ public class BoardController {
 	public BoardDto updateBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
 		MDC.put("TRANSACTION_ID", String.valueOf(boardForm.getBoard_seq()));
-		
+
 		BoardDto boardDto = boardService.updateBoard(boardForm);
-		
+
 		MDC.remove("TRANSACTION_ID");
 
 		return boardDto;
@@ -129,9 +129,9 @@ public class BoardController {
 	public BoardDto insertBoardReply(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
 
 		MDC.put("TRANSACTION_ID", String.valueOf(boardForm.getBoard_seq()));
-		
+
 		BoardDto boardDto = boardService.insertBoardReply(boardForm);
-		
+
 		MDC.remove("TRANSACTION_ID");
 
 		return boardDto;
