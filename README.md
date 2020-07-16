@@ -1,4 +1,4 @@
-## Spring 게시판 만들기 
+## [Spring] 게시판 만들기 
 - #### 개요
   - ##### Spring MVC Project를 이용하여 간단한 게시판을 만드는 과정
   
