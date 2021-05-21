@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>  
+	
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+	    	<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - [%X{TRANSACTION_ID}]:%msg%n</pattern>
+	  	</layout>
+	</appender>
+  
+  	<logger name="org.springframework" level="info" additivity="false">
+    	<appender-ref ref="console"/>
+    </logger>
+  
+  	<logger name="com.spring.board" level="debug" additivity="false">
+    	<appender-ref ref="console"/>
+    </logger>
+    
+  	<root level="info">
+    	<appender-ref ref="console"/>
+    </root>
+  
+</configuration>
