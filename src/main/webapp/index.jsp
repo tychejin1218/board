@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>[Spring] 게시판 만들기</title>
 </head>
 <body>
-	<h1>Index Page</h1>
+	<h1>[Spring] 게시판 만들기</h1>
 </body>
 </html>
