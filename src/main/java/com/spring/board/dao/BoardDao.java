@@ -26,32 +26,27 @@ public class BoardDao {
 	}
 
 	/** 게시판 - 목록 조회 */
-	public List<BoardDto> getBoardList(BoardForm boardForm) throws Exception {
-		
+	public List<BoardDto> getBoardList(BoardForm boardForm) throws Exception {		
 		return sqlSession.selectList(NAMESPACE + ".getBoardList", boardForm);
 	}
 
 	/** 게시판 - 조회 수 수정 */
 	public int updateBoardHits(BoardForm boardForm) throws Exception {
-
 		return sqlSession.update(NAMESPACE + ".updateBoardHits", boardForm);
 	}
 
 	/** 게시판 - 상세 조회 */
 	public BoardDto getBoardDetail(BoardForm boardForm) throws Exception {
-
 		return sqlSession.selectOne(NAMESPACE + ".getBoardDetail", boardForm);
 	}
 	
 	/** 게시판 - 첨부파일 조회 */
 	public List<BoardFileDto> getBoardFileList(BoardFileForm boardFileForm) throws Exception {
-
 		return sqlSession.selectList(NAMESPACE + ".getBoardFileList", boardFileForm);
 	}
 
 	/** 게시판 - 그룹 번호 조회 */
 	public int getBoardReRef(BoardForm boardForm) throws Exception {
-
 		return sqlSession.selectOne(NAMESPACE + ".getBoardReRef", boardForm);
 	}
 	
@@ -72,13 +67,11 @@ public class BoardDao {
 
 	/** 게시판 - 삭제 */
 	public int deleteBoard(BoardForm boardForm) throws Exception {
-
 		return sqlSession.delete(NAMESPACE + ".deleteBoard", boardForm);
 	}
 
 	/** 게시판 - 수정 */
 	public int updateBoard(BoardForm boardForm) throws Exception {
-
 		return sqlSession.update(NAMESPACE + ".updateBoard", boardForm);
 	}
 	
@@ -89,7 +82,6 @@ public class BoardDao {
 	
 	/** 게시판 - 답글의 순서 수정 */
 	public int updateBoardReSeq(BoardForm boardForm) throws Exception {
-
 		return sqlSession.update(NAMESPACE + ".updateBoardReSeq", boardForm);
 	}
 	
@@ -102,5 +94,4 @@ public class BoardDao {
 	public int deleteBoardFile(BoardFileForm boardFileForm) throws Exception {
 		return sqlSession.update(NAMESPACE + ".deleteBoardFile", boardFileForm);
 	}
-	
 }
