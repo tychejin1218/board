@@ -7,6 +7,6 @@
 <title>[Spring] 게시판 만들기</title>
 </head>
 <body>
-	<h1>[Spring] 게시판 만들기</h1>
+	<h1>[Spring] 게시판 만들기_테스트</h1>
 </body>
 </html>
